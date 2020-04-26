@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.digit1 = new System.Windows.Forms.Button();
             this.digit2 = new System.Windows.Forms.Button();
             this.digit3 = new System.Windows.Forms.Button();
@@ -45,6 +46,7 @@
             this.sub = new System.Windows.Forms.Button();
             this.div = new System.Windows.Forms.Button();
             this.equal = new System.Windows.Forms.Button();
+            this.timer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // digit1
@@ -265,6 +267,7 @@
         private System.Windows.Forms.Button sub;
         private System.Windows.Forms.Button div;
         private System.Windows.Forms.Button equal;
+        private System.Windows.Forms.Timer timer;
     }
 }
 
