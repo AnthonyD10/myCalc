@@ -47,6 +47,7 @@
             this.div = new System.Windows.Forms.Button();
             this.equal = new System.Windows.Forms.Button();
             this.timer = new System.Windows.Forms.Timer(this.components);
+            this.Clear = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // digit1
@@ -218,11 +219,22 @@
             this.equal.UseVisualStyleBackColor = true;
             this.equal.Click += new System.EventHandler(this.equal_Click);
             // 
+            // Clear
+            // 
+            this.Clear.Location = new System.Drawing.Point(144, 154);
+            this.Clear.Name = "Clear";
+            this.Clear.Size = new System.Drawing.Size(60, 40);
+            this.Clear.TabIndex = 18;
+            this.Clear.Text = "C";
+            this.Clear.UseVisualStyleBackColor = true;
+            this.Clear.Click += new System.EventHandler(this.Clear_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(352, 450);
+            this.Controls.Add(this.Clear);
             this.Controls.Add(this.equal);
             this.Controls.Add(this.div);
             this.Controls.Add(this.sub);
@@ -268,6 +280,7 @@
         private System.Windows.Forms.Button div;
         private System.Windows.Forms.Button equal;
         private System.Windows.Forms.Timer timer;
+        private System.Windows.Forms.Button Clear;
     }
 }
 

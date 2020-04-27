@@ -30,6 +30,7 @@ namespace MyCalc
             switch (vars.lastOperation) 
             {
                 case constants.NO_OPERATION:
+                    Entry.Text = "";
                     break;
                 case constants.DIGIT:
                     if (vars.currentOperator == constants.NO_OPERATOR)
@@ -54,6 +55,7 @@ namespace MyCalc
                 vars.first = 0;
                 vars.second = 0;
                 vars.ans = 0;
+                vars.currentOperator = constants.NO_OPERATOR;
             }
             vars.lastOperation = constants.DIGIT;
         }
@@ -139,6 +141,16 @@ namespace MyCalc
 
         }
 
+        private void Clear_Click(object sender, EventArgs e)
+        {
+            vars.first = 0;
+            vars.second = 0;
+            vars.ans = 0;
+            vars.lastOperation = constants.NO_OPERATION;
+            vars.currentOperator = constants.NO_OPERATOR;
+        }
+
+
         private static void calculation(char Operator)
         {
             vars.currentOperator = Operator;
@@ -169,17 +181,16 @@ namespace MyCalc
         private void equal_Click(object sender, EventArgs e)
         {
             bool isOk = true;
-            string ans ="";
             switch (vars.currentOperator)
             {
                 case '+':
-                    ans = (vars.first + vars.second).ToString();
+                    vars.ans = vars.first + vars.second;
                     break;
                 case '-':
-                    ans = (vars.first - vars.second).ToString();
+                    vars.ans = vars.first - vars.second;
                     break;
                 case '*':
-                    ans = (vars.first * vars.second).ToString();
+                    vars.ans = vars.first * vars.second;
                     break;
                 case '/':
                     if (vars.second == 0)
@@ -189,20 +200,26 @@ namespace MyCalc
                     }
                     else
                     {
-                        ans = (vars.first / vars.second).ToString();
+                        vars.ans = vars.first / vars.second;
                     }
                     break;
 
                 
             }
             if (isOk) {
-                Entry.Text = ans;
                 vars.first = vars.ans;
-                //vars.second = null;
+                vars.lastOperation = '=';
             }
-            vars.isFirstEqual = false;
-            vars.lastOperation = '=';
+            else
+            {
+                vars.first = 0;
+                vars.second = 0;
+                vars.ans = 0;
+                vars.lastOperation = constants.NO_OPERATION;
+                vars.currentOperator = constants.NO_OPERATOR;
+            }
         }
+        
     }
     public class vars
     {
@@ -210,6 +227,6 @@ namespace MyCalc
         public static bool isFirstEqual = true;
         public static char currentOperator = constants.NO_OPERATOR,
             lastOperation = constants.NO_OPERATION;
-        public static Int64 first = 0, second = 0, ans = 0;
+        public static double first = 0, second = 0, ans = 0;
     }
 }
