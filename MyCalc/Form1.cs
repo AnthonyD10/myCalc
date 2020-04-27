@@ -29,10 +29,16 @@ namespace MyCalc
         {
             switch (vars.lastOperation) 
             {
-                case constants.DIGIT:
                 case constants.NO_OPERATION:
-                    Entry.Text = vars.first.ToString();
-                    Console.Out.WriteLine("No_Fuck");
+                    break;
+                case constants.DIGIT:
+                    if (vars.currentOperator == constants.NO_OPERATOR)
+                        Entry.Text = vars.first.ToString();
+                    else
+                        Entry.Text = vars.first.ToString() + vars.currentOperator + vars.second.ToString();
+                    break;
+                case constants.CALCULATION:
+                    Entry.Text = vars.first.ToString() + vars.currentOperator;
                     break;
                 case '=':
                     Entry.Text = vars.ans.ToString();
@@ -54,15 +60,15 @@ namespace MyCalc
 
         private static void writeDigit(byte digit)
         {
-            if (vars.currentOperator == constants.CALCULATION)
-            {
-                vars.second *= 10;
-                vars.second += digit;
-            }
-            else
+            if (vars.currentOperator == constants.NO_OPERATOR)
             {
                 vars.first *= 10;
                 vars.first += digit;
+            }
+            else
+            {
+                vars.second *= 10;
+                vars.second += digit;
             }
         }
 
@@ -76,7 +82,6 @@ namespace MyCalc
         {
             checkEqual();
             writeDigit(1);
-            Console.Out.WriteLine(vars.first);
         }
         private void digit2_Click(object sender, EventArgs e)
         {
@@ -134,43 +139,36 @@ namespace MyCalc
 
         }
 
-        private void add_Click(object sender, EventArgs e)
+        private static void calculation(char Operator)
         {
-            vars.currentOperator = '+';
-            Entry.Text = Entry.Text + '+';
+            vars.currentOperator = Operator;
             vars.isFirstEqual = true;
             vars.lastOperation = constants.CALCULATION;
+        }
+
+        private void add_Click(object sender, EventArgs e)
+        {
+            calculation('+');
         }
 
         private void sub_Click(object sender, EventArgs e)
         {
-            vars.currentOperator = '-';
-            Entry.Text = Entry.Text + '-';
-            vars.isFirstEqual = true;
-            vars.lastOperation = constants.CALCULATION;
+            calculation('-');
         }
 
         private void mult_Click(object sender, EventArgs e)
         {
-            vars.currentOperator = '*';
-            Entry.Text = Entry.Text + '*';
-            vars.isFirstEqual = true;
-            vars.lastOperation = constants.CALCULATION;
+            calculation('*');
         }
 
         private void div_Click(object sender, EventArgs e)
         {
-            vars.currentOperator = '/';
-            Entry.Text = Entry.Text + '/';
-            vars.isFirstEqual = true;
-            vars.lastOperation = constants.CALCULATION;
+            calculation('/');
         }
 
         private void equal_Click(object sender, EventArgs e)
         {
             bool isOk = true;
-            //if (vars.isFirstEqual)
-            //    vars.second = int.Parse(Entry.Text.Split(vars.currentOperator)[1]);
             string ans ="";
             switch (vars.currentOperator)
             {
