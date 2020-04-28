@@ -74,65 +74,73 @@ namespace MyCalc
             }
         }
 
-        private void digit0_Click(object sender, EventArgs e)
+        private void inputDigit(byte digit)
         {
             checkEqual();
-            writeDigit(0);
+            writeDigit(digit);
+        }
+
+
+        private void digit0_Click(object sender, EventArgs e)
+        {
+            inputDigit(0);
         }
 
         private void digit1_Click(object sender, EventArgs e)
         {
-            checkEqual();
-            writeDigit(1);
+            inputDigit(1);
         }
         private void digit2_Click(object sender, EventArgs e)
         {
-            checkEqual();
-            writeDigit(2);
+            inputDigit(2);
         }
         private void digit3_Click(object sender, EventArgs e)
         {
-            checkEqual();
-            writeDigit(3);
+            inputDigit(3);
         }
         private void digit4_Click(object sender, EventArgs e)
         {
-            checkEqual();
-            writeDigit(4);
+            inputDigit(4);
         }
         private void digit5_Click(object sender, EventArgs e)
         {
-            checkEqual();
-            writeDigit(5);
+            inputDigit(5);
         }
         private void digit6_Click(object sender, EventArgs e)
         {
-            checkEqual();
-            writeDigit(6);
+            inputDigit(6);
         }
         private void digit7_Click(object sender, EventArgs e)
         {
-            checkEqual();
-            writeDigit(7);
+            inputDigit(7);
         }
         private void digit8_Click(object sender, EventArgs e)
         {
-            checkEqual();
-            writeDigit(8);
+            inputDigit(8);
         }
         private void digit9_Click(object sender, EventArgs e)
         {
-            checkEqual();
-            writeDigit(9);
+            inputDigit(9);
+        }
+
+        private void nullNumbersVars()
+        {
+            vars.first = 0;
+            vars.second = 0;
+            vars.ans = 0;
+        }
+        private void nullAllVars()
+        {
+            nullNumbersVars();
+            vars.lastOperation = constants.NO_OPERATION;
+            vars.currentOperator = constants.NO_OPERATOR;
         }
 
         private void backspace_Click(object sender, EventArgs e)
         {
             if (vars.lastOperation == '=')
             {
-                vars.first = 0;
-                vars.second = 0;
-                vars.ans = 0;
+                nullNumbersVars();
             }
             else if (vars.lastOperation == constants.DIGIT)
                 vars.first /= 10;
@@ -143,19 +151,15 @@ namespace MyCalc
 
         private void Clear_Click(object sender, EventArgs e)
         {
-            vars.first = 0;
-            vars.second = 0;
-            vars.ans = 0;
-            vars.lastOperation = constants.NO_OPERATION;
-            vars.currentOperator = constants.NO_OPERATOR;
+            nullAllVars();
         }
 
 
         private static void calculation(char Operator)
         {
             vars.currentOperator = Operator;
-            vars.isFirstEqual = true;
             vars.lastOperation = constants.CALCULATION;
+            vars.second = 0;
         }
 
         private void add_Click(object sender, EventArgs e)
@@ -212,11 +216,7 @@ namespace MyCalc
             }
             else
             {
-                vars.first = 0;
-                vars.second = 0;
-                vars.ans = 0;
-                vars.lastOperation = constants.NO_OPERATION;
-                vars.currentOperator = constants.NO_OPERATOR;
+                nullAllVars();
             }
         }
         
