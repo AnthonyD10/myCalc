@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MyCalc
 {
-    class vars
+    class Vars
     {
         public static char currentOperator = constants.NO_OPERATOR,
             lastOperation = constants.NO_OPERATION;

@@ -27,50 +27,50 @@ namespace MyCalc
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            switch (vars.lastOperation) 
+            switch (Vars.lastOperation) 
             {
                 case constants.NO_OPERATION:
                     Entry.Text = "";
                     break;
                 case constants.DIGIT:
-                    if (vars.currentOperator == constants.NO_OPERATOR)
-                        Entry.Text = vars.first.ToString();
+                    if (Vars.currentOperator == constants.NO_OPERATOR)
+                        Entry.Text = Vars.first.ToString();
                     else
-                        Entry.Text = vars.first.ToString() + vars.currentOperator + vars.second.ToString();
+                        Entry.Text = Vars.first.ToString() + Vars.currentOperator + Vars.second.ToString();
                     break;
                 case constants.CALCULATION:
-                    Entry.Text = vars.first.ToString() + vars.currentOperator;
+                    Entry.Text = Vars.first.ToString() + Vars.currentOperator;
                     break;
                 case '=':
-                    Entry.Text = vars.ans.ToString();
+                    Entry.Text = Vars.ans.ToString();
                     break;
             }
         }
 
         private void checkEqual()
         {
-            if (vars.lastOperation == '=')
+            if (Vars.lastOperation == '=')
             {
                 Entry.Text = "";
-                vars.first = 0;
-                vars.second = 0;
-                vars.ans = 0;
-                vars.currentOperator = constants.NO_OPERATOR;
+                Vars.first = 0;
+                Vars.second = 0;
+                Vars.ans = 0;
+                Vars.currentOperator = constants.NO_OPERATOR;
             }
-            vars.lastOperation = constants.DIGIT;
+            Vars.lastOperation = constants.DIGIT;
         }
 
         private static void writeDigit(byte digit)
         {
-            if (vars.currentOperator == constants.NO_OPERATOR)
+            if (Vars.currentOperator == constants.NO_OPERATOR)
             {
-                vars.first *= 10;
-                vars.first += digit;
+                Vars.first *= 10;
+                Vars.first += digit;
             }
             else
             {
-                vars.second *= 10;
-                vars.second += digit;
+                Vars.second *= 10;
+                Vars.second += digit;
             }
         }
 
@@ -125,27 +125,27 @@ namespace MyCalc
 
         private void nullNumbersVars()
         {
-            vars.first = 0;
-            vars.second = 0;
-            vars.ans = 0;
+            Vars.first = 0;
+            Vars.second = 0;
+            Vars.ans = 0;
         }
         private void nullAllVars()
         {
             nullNumbersVars();
-            vars.lastOperation = constants.NO_OPERATION;
-            vars.currentOperator = constants.NO_OPERATOR;
+            Vars.lastOperation = constants.NO_OPERATION;
+            Vars.currentOperator = constants.NO_OPERATOR;
         }
 
         private void backspace_Click(object sender, EventArgs e)
         {
-            if (vars.lastOperation == '=')
+            if (Vars.lastOperation == '=')
             {
                 nullNumbersVars();
             }
-            else if (vars.lastOperation == constants.DIGIT)
-                vars.first /= 10;
-            else if (vars.currentOperator == constants.CALCULATION)
-                vars.second /= 10;
+            else if (Vars.lastOperation == constants.DIGIT)
+                Vars.first /= 10;
+            else if (Vars.currentOperator == constants.CALCULATION)
+                Vars.second /= 10;
 
         }
 
@@ -154,12 +154,11 @@ namespace MyCalc
             nullAllVars();
         }
 
-
         private static void calculation(char Operator)
         {
-            vars.currentOperator = Operator;
-            vars.lastOperation = constants.CALCULATION;
-            vars.second = 0;
+            Vars.currentOperator = Operator;
+            Vars.lastOperation = constants.CALCULATION;
+            Vars.second = 0;
         }
 
         private void add_Click(object sender, EventArgs e)
@@ -185,34 +184,34 @@ namespace MyCalc
         private void equal_Click(object sender, EventArgs e)
         {
             bool isOk = true;
-            switch (vars.currentOperator)
+            switch (Vars.currentOperator)
             {
                 case '+':
-                    vars.ans = vars.first + vars.second;
+                    Vars.ans = Vars.first + Vars.second;
                     break;
                 case '-':
-                    vars.ans = vars.first - vars.second;
+                    Vars.ans = Vars.first - Vars.second;
                     break;
                 case '*':
-                    vars.ans = vars.first * vars.second;
+                    Vars.ans = Vars.first * Vars.second;
                     break;
                 case '/':
-                    if (vars.second == 0)
+                    if (Vars.second == 0)
                     {
                         Entry.Text = "You divided by Zero";
                         isOk = false;
                     }
                     else
                     {
-                        vars.ans = vars.first / vars.second;
+                        Vars.ans = Vars.first / Vars.second;
                     }
                     break;
 
                 
             }
             if (isOk) {
-                vars.first = vars.ans;
-                vars.lastOperation = '=';
+                Vars.first = Vars.ans;
+                Vars.lastOperation = '=';
             }
             else
             {
